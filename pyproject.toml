@@ -1,0 +1,14 @@
+[project]
+name = "4xGrid"
+version = "0.0.1"
+authors = [
+  { name="george" },
+]
+description = "An implementation of Hasbro's Connect Four in Python for educational purposes"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = {text = "GPL-3.0-only"}
