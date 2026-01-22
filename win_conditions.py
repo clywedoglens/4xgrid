@@ -23,53 +23,38 @@ def in_bounds(i, j):
     
 def straight_down(i, j, board, piece):
     cons = 0
-    while in_bounds(i, j) and board[i][j] == piece:
-        cons += 1
-        j -= 1
-    return cons == GOAL
+    for n in range(1, GOAL):
+        if in_bounds(i, j - n) and board[i][j - n] == piece:
+            cons += 1
+    return GOAL <= 1 + cons
 
 def horizontal(i, j, board, piece):
     cons1 = 0
     cons2 = 0
-    for n in range(1, -GOAL, -1):
-        if not in_bounds(i - n, j) or board[i - n][j] != piece:
-            break
-        cons1 += 1
-    
     for n in range(1, GOAL):
-        if not in_bounds(i + n, j) or board[i + n][j] != piece:
-            break
-        cons2 += 1
-    
+        if in_bounds(i - n, j) and board[i - n][j] == piece:
+            cons1 += 1
+        if in_bounds(i + n, j) and board[i + n][j] == piece:
+            cons2 += 1
     return GOAL <= 1 + cons1 + cons2
 
 
 def left_diagonal(i, j, board, piece):
     cons1 = 0
     cons2 = 0
-    for n in range(1, -GOAL, -1):
-        if not in_bounds(i - n, j + n) or board[i - n][j + n] != piece:
-            break
-        cons1 += 1
-    
     for n in range(1, GOAL):
-        if not in_bounds(i + n, j - n) or board[i + n][j - n] != piece:
-            break
-        cons2 += 1
-    
+        if in_bounds(i - n, j + n) and board[i - n][j + n] == piece:
+            cons1 += 1
+        if in_bounds(i + n, j - n) and board[i + n][j - n] == piece:
+            cons2 += 1
     return GOAL <= 1 + cons1 + cons2
 
 def right_diagonal(i, j, board, piece):
     cons1 = 0
     cons2 = 0
-    for n in range(1, -GOAL, -1):
-        if not in_bounds(i + n, j + n) or board[i + n][j + n] != piece:
-            break
-        cons1 += 1
-    
     for n in range(1, GOAL):
-        if not in_bounds(i - n, j - n) or board[i - n][j - n] != piece:
-            break
-        cons2 += 1
-    
+        if in_bounds(i + n, j + n) and board[i + n][j + n] == piece:
+            cons1 += 1
+        if in_bounds(i - n, j - n) and board[i - n][j - n] == piece:
+            cons2 += 1
     return GOAL <= 1 + cons1 + cons2
