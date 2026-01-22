@@ -28,7 +28,9 @@ def display_board(board, game_state):
               if game_state in [GameState.PLAYER1_WIN, GameState.PLAYER1_TURN]
               else 'Player 2')
     # check if game has been won
-    if game_state in GameState.GAME_OVER:
+    if game_state is GameState.DRAW:
+        print('Game finishes in a draw!')
+    elif game_state in GameState.GAME_OVER:
         print(f'{player} has won the game!')
     else:
         print(f'Current Turn: {player}')

@@ -44,9 +44,6 @@ def run_game(game_state):
         row = board[0][col]
         board[col][row] = piece
         game_state = game_over(board, game_state)
-        if game_state not in GameState.GAME_OVER:
-            # update the row value for the column
-            board[0][col] += 1
     display_board(board, game_state)
     time.sleep(5)
 
@@ -121,10 +118,6 @@ def game_over(board, game_state):
     move_col = board[0][0]
     move_row = board[0][move_col]
 
-    # return immediately in case of draw
-    if all(map((lambda x: x == SEVEN), board[0][1:])):
-        return GameState.DRAW
-
     piece = PLAYER1_PIECE if game_state is GameState.PLAYER1_TURN else PLAYER2_PIECE
     # helper functions for win conditions
 
@@ -133,7 +126,11 @@ def game_over(board, game_state):
                    horizontal(move_col, move_row, board, piece),
                    left_diagonal(move_col, move_row, board, piece),
                    right_diagonal(move_col, move_row, board, piece)])
-    if game_state is GameState.PLAYER1_TURN:
+    # increment the move_row for next piece
+    board[0][move_col] += 1
+    if not game_won and all(map((lambda x: x == NUM_ROWS), board[0][1:])):
+        game_state = GameState.DRAW
+    elif game_state is GameState.PLAYER1_TURN:
         game_state = (GameState.PLAYER1_WIN if game_won
                       else GameState.PLAYER2_TURN)
     else:
