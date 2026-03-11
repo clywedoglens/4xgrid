@@ -37,8 +37,6 @@ def run_game(board, game_state, display=None, cpu=True):
         if display:
             display(board, game_state)
         board, game_state = move(board, game_state, display)
-        # column has been selected
-        # update the board
         col = board[0][0]
         row = board[0][col]
         board[col][row] = piece
@@ -103,7 +101,6 @@ def player_move(board, game_state, display):
             # hit enter
             pending_move = False
         elif ord(ch) in [LEFT_KEY, RIGHT_KEY]:
-            # move selection to next valid column
             current = board[0][0]
             if ord(ch) == RIGHT_KEY:
                 shift = increment_col
