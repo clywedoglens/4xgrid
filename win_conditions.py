@@ -26,8 +26,6 @@ def straight_down(i, j, board, piece):
     for n in range(1, GOAL):
         if not in_bounds(i, j - n) or board[i][j - n] != piece:
             return False
-    print(f'straight down winning move {i, j}')
-    time.sleep(8)
     return True
 
 
@@ -42,9 +40,6 @@ def horizontal(i, j, board, piece):
         if not in_bounds(i + n, j) or board[i + n][j] != piece:
             break
         cons2 += 1
-    if GOAL <= 1 + cons1 + cons2:
-        print(f'horizontal winning move {i, j} cons1: {cons1} cons2: {cons2}')
-        time.sleep(8)
     return GOAL <= 1 + cons1 + cons2
 
 
@@ -59,9 +54,6 @@ def left_diagonal(i, j, board, piece):
         if not in_bounds(i + n, j - n) or board[i + n][j - n] != piece:
             break
         cons2 += 1
-    if GOAL <= 1 + cons1 + cons2:
-        print(f'left diag winning move {i, j} cons1: {cons1} cons2: {cons2}')
-        time.sleep(8)
     return GOAL <= 1 + cons1 + cons2
 
 def right_diagonal(i, j, board, piece):
@@ -75,7 +67,4 @@ def right_diagonal(i, j, board, piece):
         if not in_bounds(i - n, j - n) or board[i - n][j - n] != piece:
             break
         cons2 += 1
-    if GOAL <= 1 + cons1 + cons2:
-        print(f'right diag winning move {i, j} cons1: {cons1} cons2: {cons2}')
-        time.sleep(8)
     return GOAL <= 1 + cons1 + cons2

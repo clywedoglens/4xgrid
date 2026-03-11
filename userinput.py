@@ -50,30 +50,34 @@ def get_input():
             return dr != []
         
         def getch():
-            print('getch')
             return sys.stdin.buffer.read(1)
-        kb_input = ''
-    while kb_input == '':
+        kb_input = b''
+    while kb_input == b'':
         if kbhit():
             ch = getch()
-            print(f'ch: {ch}')
             if b'1' <= ch <= b'7':
-                kb_input = int(ch)
+                kb_input = ch
             elif ch == ENTER:
                 kb_input = ENTER
             elif ch == ESC:
                 getch()
                 ch = getch()
                 if ord(ch) in [LEFT_KEY, RIGHT_KEY]:
-                    kb_input = ord(ch)
+                    kb_input = ch
             else:
-                kb_input = chr(ord(ch))
+                kb_input = ch
     
     return kb_input
 
 
 def play_again():
-    ans = ''
-    while ans not in [YES, NO]:
-        ans = get_input()
-    return ans
+    choice = ''
+    while choice not in [YES, NO]:
+        choice = get_input()
+    return choice
+
+def against_cpu():
+    choice = ''
+    while choice not in [YES_CPU, NO_CPU]:
+        choice = get_input()
+    return choice

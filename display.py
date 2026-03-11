@@ -19,15 +19,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import os, time
 
 from constants import *
+from userinput import against_cpu, play_again
 
-def display_board(board, game_state):
-    # print('clearing screen in 3 seconds')
-    # time.sleep(3)
-    os.system('clear')
+def display_board(board, game_state, stats):
+    clear_screen()
     player = ('Player 1' 
               if game_state in [GameState.PLAYER1_WIN, GameState.PLAYER1_TURN]
               else 'Player 2')
-    # check if game has been won
     if game_state is GameState.DRAW:
         print('Game finishes in a draw!')
     elif game_state in GameState.GAME_OVER:
@@ -35,7 +33,6 @@ def display_board(board, game_state):
     else:
         print(f'Current Turn: {player}')
         print('Select column for your move')
-        # display the column selection arrow here
         selected = board[0][0]
         for col in range(1, NUM_COLS + 1):
             end = '' if col < NUM_COLS else '\n'
@@ -48,11 +45,22 @@ def display_board(board, game_state):
             end = '' if col < NUM_COLS else '\n'
             print(f'[{PIECE_DISPLAY[board[col][row]]}]', end=end)
     print()
-    print(board[0])
+    print(f'P1 WINS: {stats[PLAYER1_WINS]}')
+    print(f'P2 WINS: {stats[PLAYER2_WINS]}')
+    print(f'  DRAWS: {stats[DRAWS]}')
 
 
 def prompt_play_again():
-    pass
+    print('Play again? y/n')
+    choice_dict = {YES: GameState.START, NO: GameState.END}
+    choice = play_again()
+    return choice_dict[choice]
+
+def prompt_cpu():
+    clear_screen()
+    print('1. Player vs CPU')
+    print('2. Two players')
+    return against_cpu() == YES_CPU
 
 def clear_screen():
-    pass
+    os.system('clear')

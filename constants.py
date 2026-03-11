@@ -50,12 +50,20 @@ ESC = b'\x1b'
 LEFT_KEY = 68
 RIGHT_KEY = 67
 ENTER = b'\n'
-YES = 'y'
-NO = 'n'
+YES = b'y'
+NO = b'n'
 
 ZERO = 0
 ONE = 1
 SEVEN = 7
 GOAL = 4
 
-CPU_WEIGHTS = [0.1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1]
+YES_CPU = b'1'
+NO_CPU = b'2'
+
+PLAYER1_WINS = 'player1_wins'
+PLAYER2_WINS = 'player2_wins'
+DRAWS = 'draws'
+GAMES_PLAYED = 'games_played'
+
+CENTER_COLS = [4, 3, 5, 2, 6, 1, 7]
